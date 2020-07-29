@@ -4,9 +4,13 @@
 # https://docs.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+from scrapy.loader.processors import TakeFirst
 
 
-class DailymedItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class InactiveItem(scrapy.Item):
+    drug_name = scrapy.Field(
+        output_processor = TakeFirst()
+    )
+    spl_file = scrapy.Field()
+    spl_path = scrapy.Field()
+    text = scrapy.Field()
