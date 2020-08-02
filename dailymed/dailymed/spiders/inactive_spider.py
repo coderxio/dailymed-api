@@ -1,7 +1,6 @@
 import scrapy
 from scrapy.loader import ItemLoader
 from pathlib import Path
-from dailymed.items import InactiveItem
 
 def get_filenames():
     cwd = Path(__file__)
@@ -16,10 +15,17 @@ class InactiveSpider(scrapy.Spider):
     def parse(self, response):
         response.selector.remove_namespaces()
         document = response.xpath("//document")
+        manu_products = document.xpath('.//subject/manufacturedProduct/manufacturedProduct')
 
-        il = ItemLoader(item=InactiveItem(), selector=document)
-        il.add_value('spl_path', response.url)
-        il.add_value('spl_file', Path(response.url).stem)
-        il.add_xpath('text', '//paragraph[contains(text(), "inactive")]/text()')
-        il.add_xpath('drug_name', '//manufacturedProduct/manufacturedProduct/name/text()')
-        yield il.load_item()
+        for manu_product in manu_products:
+            for ndc in manu_product.xpath('.//containerPackagedProduct/code/@code').getall():
+                data_dict = {
+                    'setId': document.xpath('./setId/@root').get(),
+                    'spl_file': Path(response.url).name,
+                    'ndc': ndc,
+                    'name': manu_product.xpath('./name/text()').get(),
+                    'active': manu_product.xpath('.//ingredient[starts-with(@classCode, "ACT")]//name/text()').get(),
+                    'inactive': manu_product.xpath('.//ingredient[@classCode="IACT"]//name/text()').getall()
+                }
+
+            yield data_dict
