@@ -20,12 +20,14 @@ class InactiveSpider(scrapy.Spider):
         for manu_product in manu_products:
             for ndc in manu_product.xpath('.//containerPackagedProduct/code/@code').getall():
                 data_dict = {
-                    'setId': document.xpath('./setId/@root').get(),
-                    'spl_file': Path(response.url).name,
+                    'set_id': document.xpath('./setId/@root').get(),
+                    'spl_id': document.xpath('./id/@root').get(),
+                    'org': document.xpath('.//representedOrganization/name/text()').get(),
                     'ndc': ndc,
+                    'schedule': document.xpath('.//policy/code/@displayName').get(),
                     'name': manu_product.xpath('./name/text()').get(),
                     'active': manu_product.xpath('.//ingredient[starts-with(@classCode, "ACT")]//name/text()').get(),
                     'inactive': manu_product.xpath('.//ingredient[@classCode="IACT"]//name/text()').getall()
                 }
 
-            yield data_dict
+                yield data_dict
