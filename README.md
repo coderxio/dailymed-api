@@ -6,6 +6,10 @@ This project uses poetry but its not necessary to install. It does require scrap
 
 1. Create data dir
 2. download spl archive zip to data/
-3. Run `extract_data.py`, this will extract just the spl xml files into data/partial/
+3. Run `extract_zips.py`, this will extract just the spl xml files into data/partial/
 4. cd into dailymed/
 5. Run `scrapy crawl inactive -o inactive.csv -t csv`, to generate a csv
+
+#### Scrapy Integration
+
+In order to use django models within a scrapy the `PYTHONPATH` env variable must be set. To set this env var use, run `export PYTHONPATH=/home/<your-user-name/path/to/django/project`. As an example to set this on my ubuntu machine I would run `export PYTHONPATH=/home/yevgeny/workspace/dm_extracts/api`. In future iterations of this repo, this process will be automated. 
