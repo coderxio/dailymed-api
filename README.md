@@ -7,7 +7,7 @@ This project uses poetry but its not necessary to install. It does require scrap
 1. Create data dir
 2. download spl archive zip to data/
 3. Run `extract_zips.py`, this will extract just the spl xml files into data/partial/
-4. cd into dailymed/
+4. cd into scraper/
 5. Run `scrapy crawl basic_extract -o basic_extract.csv -t csv`, to generate a csv
 
 #### Scrapy Integration
