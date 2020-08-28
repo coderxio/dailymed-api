@@ -7,6 +7,20 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+# Settings to allow django model imports, workaround should use setup scripts to make these installabale
+import sys
+import os
+import django
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
+DJANGO_DIR = BASE_DIR / 'api'
+
+sys.path.append(DJANGO_DIR)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'api.settings'
+django.setup()
+
+
 BOT_NAME = 'scraper'
 
 SPIDER_MODULES = ['scraper.spiders']
