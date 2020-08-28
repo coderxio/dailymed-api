@@ -1,12 +1,8 @@
 import scrapy
 from scrapy.loader import ItemLoader
+from scraper.utils import get_filenames
 from pathlib import Path
 
-def get_filenames():
-    cwd = Path(__file__)
-    partial_dir = cwd.parent.parent.parent.parent.absolute() / 'data' / 'partial'
-    adjusted_filenames = [ f'file://{path}' for path in list(partial_dir.iterdir()) ]
-    return adjusted_filenames
 
 class InactiveSpider(scrapy.Spider):
     name = 'basic_extract'
