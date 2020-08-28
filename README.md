@@ -12,4 +12,4 @@ This project uses poetry but its not necessary to install. It does require scrap
 
 #### Scrapy Integration
 
-In order to use django models within a scrapy the `PYTHONPATH` env variable must be set. To set this env var use, run `export PYTHONPATH=/home/<your-user-name/path/to/django/project`. As an example to set this on my ubuntu machine I would run `export PYTHONPATH=/home/yevgeny/workspace/dm_extracts/api`. In future iterations of this repo, this process will be automated. 
+In order to use django models within scrapy the `PYTHONPATH` env variable must be set. To set this env var use, run `export PYTHONPATH=/home/<your-user-name/path/to/django/project`. As an example to set this on my ubuntu machine I would run `export PYTHONPATH=/home/yevgeny/workspace/dm_extracts/api`. In future iterations of this repo, this process will be automated. 
