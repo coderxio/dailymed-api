@@ -9,7 +9,7 @@ def get_filenames():
     return adjusted_filenames
 
 class InactiveSpider(scrapy.Spider):
-    name = 'inactive'
+    name = 'basic_extract'
     start_urls = get_filenames()
 
     def parse(self, response):
