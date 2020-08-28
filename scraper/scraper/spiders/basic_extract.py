@@ -1,7 +1,6 @@
 import scrapy
 from scrapy.loader import ItemLoader
 from scraper.utils import get_filenames
-from pathlib import Path
 
 
 class InactiveSpider(scrapy.Spider):
