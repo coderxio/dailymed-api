@@ -2,13 +2,13 @@ from django.db import models
 
 
 class Set(models.Model):
-    """Dailymed set model which can contain multiple spl files"""
-    name = models.CharField(max_length=100)
+    """DailyMed set model which can contain multiple spl files"""
+    id = models.CharField(max_length=100, primary_key=True)
 
 
 class Spl(models.Model):
-    """Dailymed model for individual spl xml files"""
-    name = models.CharField(max_length=100)
+    """DailyMed model for individual spl xml files"""
+    id = models.CharField(max_length=100, primary_key=True)
     set = models.ForeignKey(
         Set,
         on_delete=models.PROTECT,
@@ -16,7 +16,7 @@ class Spl(models.Model):
     )
 
 class Ndc(models.Model):
-    value = models.CharField(max_length=15)
+    ndc = models.CharField(max_length=15)
     spl = models.ForeignKey(
         Spl,
         on_delete=models.PROTECT,

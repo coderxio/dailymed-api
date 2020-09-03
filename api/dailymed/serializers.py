@@ -4,24 +4,17 @@ from dailymed.models import Set, Spl, Ndc
 class SetSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Set
-        fields = ['id', 'name', 'spls']
-        extra_kwargs = {
-            'spls': {'lookup_field': 'name'}
-        }
+        fields = ['id', 'spls']
 
 class SplSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Spl
-        fields = ['id', 'name', 'set', 'ndcs']
+        fields = ['id', 'set', 'ndcs']
         extra_kwargs = {
-            'set': {'lookup_field': 'name'},
-            'ndcs': {'lookup_field': 'value'}
+            'ndcs': {'lookup_field': 'ndc'}
         }
 
 class NdcSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ndc
-        fields = ['id', 'value', 'spl']
-        extra_kwargs = {
-            'spl': {'lookup_field': 'name'},
-        }
+        fields = ['id', 'ndc', 'spl']

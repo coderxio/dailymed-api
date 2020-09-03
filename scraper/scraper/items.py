@@ -7,12 +7,12 @@ import scrapy
 
 
 class SetItem(scrapy.Item):
-    name = scrapy.Field()
+    id = scrapy.Field()
     spls = scrapy.Field()
 
 class SplItem(scrapy.Item):
-    name = scrapy.Field()
+    id = scrapy.Field()
     ndcs = scrapy.Field()
 
 class NdcItem(scrapy.Item):
-    value = scrapy.Field()
+    ndc = scrapy.Field()

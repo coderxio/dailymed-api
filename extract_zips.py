@@ -16,7 +16,7 @@ except:
     raise Exception("Is there a zip file in the data dir?")
 
 with zipfile.ZipFile(ziped_dm_data) as zip_ref:
-    unzip_count = 50
+    unzip_count = 5000
 
     for spl_zip in zip_ref.namelist():
         if not unzip_count:

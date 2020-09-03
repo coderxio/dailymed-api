@@ -8,18 +8,16 @@ class SetViewSet(mixins.RetrieveModelMixin,
                     viewsets.GenericViewSet):
     queryset = Set.objects.all()
     serializer_class = SetSerializer
-    lookup_field = 'name'
 
 class SplViewSet(mixins.RetrieveModelMixin,
                     mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     queryset = Spl.objects.all()
     serializer_class = SplSerializer
-    lookup_field = 'name'
 
 class NdcViewSet(mixins.RetrieveModelMixin,
                     mixins.ListModelMixin,
                     viewsets.GenericViewSet):
     queryset = Ndc.objects.all()
     serializer_class = NdcSerializer
-    lookup_field = 'value'
+    lookup_field = 'ndc'

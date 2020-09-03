@@ -18,3 +18,8 @@ In order to use django models within scrapy the `PYTHONPATH` env variable must b
 
 1. cd into the `api/` dir and execute `./manage.py migrate` to create a sqlite db.
 2. cd into the `scraper/` dir and run `scrapy crawl json_extract` to populate the db.
+
+### Django Rest Framework API Usage
+
+1. cd into the `api/` dir and execute `./manage.py runserver 0.0.0.0:8000` to start the API server
+2. In a web browser, open up `localhost:8000`
