@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  api:
+    build:
+      context: .
+    container_name: dailymed-api
+    entrypoint: ./entrypoint.sh
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/dailymed-api
+      - ./data:/dailymed-api/data
