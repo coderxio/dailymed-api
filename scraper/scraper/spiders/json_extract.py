@@ -1,43 +1,42 @@
 import scrapy
 from scrapy.loader import ItemLoader
 from scraper.utils import get_filenames
-from scraper.items import SetItem, SplItem, NdcItem
+from scraper.items import SplItem, ProductItem, PackageItem
 from dailymed.models import Set, Spl, Ndc
 
 
 class JsonSpider(scrapy.Spider):
-    """This class is really just a proof of concept to get models working in django. This needs to be redesigned and adjusted in the future"""
     name = 'json_extract'
     start_urls = get_filenames()
 
     def parse(self, response):
         response.selector.remove_namespaces()
         document = response.xpath('//document')
-        manu_products = document.xpath('.//subject/manufacturedProduct/manufacturedProduct')
+        manu_products = document.xpath('.//subject/manufacturedProduct')
 
-        set_item = SetItem()
-        set_item['id'] = document.xpath('./setId/@root').get()
+        spl_il = ItemLoader(item=SplItem(), selector=document)
+        spl_il.add_xpath('id', './id/@root')
+        spl_il.add_xpath('set_id', './setId/@root')
+        spl_il.add_xpath('labeler', './/representedOrganization/name/text()')
 
-        spl_item = SplItem()
-        spl_item['id'] = document.xpath('./id/@root').get()
+        for product in manu_products:
+            product_il = ItemLoader(item=ProductItem(), selector=product)
+            product_il.add_xpath('code', './manufacturedProduct/code/@code')
+            product_il.add_xpath('name', './manufacturedProduct/name/text()')
+            product_il.add_xpath('active_ing', './/ingredient[starts-with(@classCode, "ACT")]/ingredientSubstance/name/text()')
+            product_il.add_xpath('inactive_ing', './/ingredient[starts-with(@classCode, "IACT")]/ingredientSubstance/name/text()')
 
-        ndc_list = []
+            for package in product.xpath('.//containerPackagedProduct'):
+                package_il = ItemLoader(item=PackageItem(), selector=package)
+                package_il.add_xpath('code', './code/@code')
 
-        for manu_product in manu_products:
-            for ndc in manu_product.xpath('.//containerPackagedProduct/code/@code').getall():
-                ndc_item = NdcItem()
-                ndc_item['ndc'] = ndc
-                ndc_list.append(dict(ndc_item))
+                if not package_il.load_item():
+                    continue
 
-        spl_item['ndcs'] = ndc_list
+                product_il.add_value('packages', package_il.load_item())
 
-        set_item['spls'] = [dict(spl_item)]
 
-        set = Set.objects.create(id=set_item['id'])
+            spl_il.add_value('products', product_il.load_item())
 
-        for spl_data in set_item['spls']:
-            ndcs = spl_data.pop('ndcs')
-            spl = set.spls.create(**spl_data)
 
-            for ndc_data in ndcs:
-                spl.ndcs.create(**ndc_data)
+        return spl_il.load_item()
