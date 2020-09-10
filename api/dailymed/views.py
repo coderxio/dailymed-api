@@ -1,23 +1,36 @@
-from dailymed.models import Set, Spl, Ndc
-from dailymed.serializers import SetSerializer, SplSerializer, NdcSerializer
-from rest_framework import permissions, viewsets, mixins
+from rest_framework import viewsets, mixins
+from dailymed.models import Set, Spl, Product, Package
+from dailymed.serializers import (
+    SetSerializer,
+    SplSerializer,
+    ProductSerializer,
+    PackageSerializer,
+)
 
-# Create your views here.
-class SetViewSet(mixins.RetrieveModelMixin,
-                    mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+
+class SetViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
     queryset = Set.objects.all()
     serializer_class = SetSerializer
 
-class SplViewSet(mixins.RetrieveModelMixin,
-                    mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
+
+class SplViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
     queryset = Spl.objects.all()
     serializer_class = SplSerializer
 
-class NdcViewSet(mixins.RetrieveModelMixin,
-                    mixins.ListModelMixin,
-                    viewsets.GenericViewSet):
-    queryset = Ndc.objects.all()
-    serializer_class = NdcSerializer
-    lookup_field = 'ndc'
+
+class ProductViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+
+class PackageViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = Package.objects.all()
+    serializer_class = PackageSerializer
