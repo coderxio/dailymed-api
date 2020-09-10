@@ -5,6 +5,7 @@ python:
 
 install:
     - pip install poetry
+    - export PYTHONPATH=$PYTHONPATH:$(pwd)
 
 before_script: poetry install
 
