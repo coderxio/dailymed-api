@@ -6,7 +6,8 @@ from dailymed import views
 router = DefaultRouter()
 router.register(r'set', views.SetViewSet)
 router.register(r'spl', views.SplViewSet)
-router.register(r'ndc', views.NdcViewSet)
+router.register(r'product', views.ProductViewSet)
+router.register(r'ndc', views.PackageViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
