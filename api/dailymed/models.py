@@ -12,13 +12,27 @@ class Spl(models.Model):
     set = models.ForeignKey(
         Set,
         on_delete=models.PROTECT,
-        related_name="spls"
+        related_name='spls',
     )
+    labeler = models.CharField(max_length=200)
 
-class Ndc(models.Model):
-    ndc = models.CharField(max_length=15)
+
+class Product(models.Model):
+    """Product level model"""
+    code = models.CharField(max_length=20)
+    name = models.CharField(max_length=50)
     spl = models.ForeignKey(
         Spl,
         on_delete=models.PROTECT,
-        related_name="ndcs"
+        related_name='products',
+    )
+
+
+class Package(models.Model):
+    """Package level model"""
+    code = models.CharField(max_length=20)
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.PROTECT,
+        related_name='packages'
     )
