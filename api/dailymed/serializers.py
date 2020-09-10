@@ -2,25 +2,33 @@ from rest_framework import serializers
 from dailymed.models import Set, Spl, Product, Package
 
 
-class SetSerializer(serializers.ModelSerializer):
+class PackageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Set
-        fields = '__all__'
+        model = Package
+        exclude = ('product', )
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    packages = PackageSerializer(many=True)
+
+    class Meta:
+        model = Product
+        exclude = ('spl', )
 
 
 class SplSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True)
+
     class Meta:
         model = Spl
         fields = '__all__'
 
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
+class SetSerializer(serializers.ModelSerializer):
+    spls = serializers.HyperlinkedRelatedField(
+        many=True, read_only=True, view_name='spl-detail',
+    )
 
-
-class PackageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Package
+        model = Set
         fields = '__all__'
