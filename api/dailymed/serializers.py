@@ -1,20 +1,26 @@
 from rest_framework import serializers
-from dailymed.models import Set, Spl, Ndc
+from dailymed.models import Set, Spl, Product, Package
 
-class SetSerializer(serializers.HyperlinkedModelSerializer):
+
+class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
-        fields = ['id', 'spls']
+        fields = '__all__'
 
-class SplSerializer(serializers.HyperlinkedModelSerializer):
+
+class SplSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spl
-        fields = ['id', 'set', 'ndcs']
-        extra_kwargs = {
-            'ndcs': {'lookup_field': 'ndc'}
-        }
+        fields = '__all__'
 
-class NdcSerializer(serializers.HyperlinkedModelSerializer):
+
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Ndc
-        fields = ['id', 'ndc', 'spl']
+        model = Product
+        fields = '__all__'
+
+
+class PackageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = '__all__'
