@@ -9,4 +9,6 @@ install:
 before_script: poetry install
 
 script:
-    - python manage.py test && flake8
+    - python manage.py migrate
+    - python manage.py test
+    - flake8
