@@ -2,7 +2,6 @@ import scrapy
 from scrapy.loader import ItemLoader
 from scraper.utils import get_filenames
 from scraper.items import SplItem, ProductItem, PackageItem
-from dailymed.models import Set, Spl, Ndc
 
 
 class JsonSpider(scrapy.Spider):
@@ -23,8 +22,8 @@ class JsonSpider(scrapy.Spider):
             product_il = ItemLoader(item=ProductItem(), selector=product)
             product_il.add_xpath('code', './manufacturedProduct/code/@code')
             product_il.add_xpath('name', './manufacturedProduct/name/text()')
-            product_il.add_xpath('active_ing', './/ingredient[starts-with(@classCode, "ACT")]/ingredientSubstance/name/text()')
-            product_il.add_xpath('inactive_ing', './/ingredient[starts-with(@classCode, "IACT")]/ingredientSubstance/name/text()')
+            #  product_il.add_xpath('active_ing', './/ingredient[starts-with(@classCode, "ACT")]/ingredientSubstance/name/text()')
+            #  product_il.add_xpath('inactive_ing', './/ingredient[starts-with(@classCode, "IACT")]/ingredientSubstance/name/text()')
 
             for package in product.xpath('.//containerPackagedProduct'):
                 package_il = ItemLoader(item=PackageItem(), selector=package)
