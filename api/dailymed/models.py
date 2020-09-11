@@ -26,7 +26,7 @@ class Spl(models.Model):
 class Product(models.Model):
     """Product level model"""
     code = models.CharField(max_length=20)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=255)
     spl = models.ForeignKey(
         Spl,
         on_delete=models.PROTECT,
