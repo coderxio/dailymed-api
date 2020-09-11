@@ -1,0 +1,13 @@
+language: python
+python:
+    - "3.7"
+    - "3.8"
+
+install:
+    - pip install poetry
+    - export PYTHONPATH=$PYTHONPATH:$(pwd)
+
+before_script: poetry install
+
+script:
+    - cd api && python manage.py migrate && python manage.py test && flake8
