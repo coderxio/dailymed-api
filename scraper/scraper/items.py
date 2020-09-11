@@ -30,8 +30,8 @@ class ProductItem(Item):
     name = Field(
         output_processor = TakeFirst()
     )
-    active_ing = Field()
-    inactive_ing = Field()
+    active_ingredient = Field()
+    inactive_ingredient = Field()
     packages = Field()
 
 
