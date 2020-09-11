@@ -11,7 +11,7 @@ from dailymed.models import Set
 class ScraperPipeline:
     def process_item(self, item, spider):
         set_id = item.pop('set_id')
-        products_data = item.pop("products")
+        products_data = item.pop('products')
         set = Set.objects.create(id=set_id)
         spl = set.spls.create(**item)
 
