@@ -12,7 +12,7 @@ if not partial_dir.exists():
 
 try:
     ziped_dm_data = list(data_dir.glob('*.zip'))[0]
-except:
+except Exception:
     raise Exception("Is there a zip file in the data dir?")
 
 with zipfile.ZipFile(ziped_dm_data) as zip_ref:

@@ -9,26 +9,26 @@ from scrapy.loader.processors import TakeFirst
 
 class SplItem(Item):
     id = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
     set_id = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
     labeler = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
     schedule = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
     products = Field()
 
 
 class ProductItem(Item):
     code = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
     name = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
     active_ingredient = Field()
     inactive_ingredient = Field()
@@ -37,5 +37,5 @@ class ProductItem(Item):
 
 class PackageItem(Item):
     code = Field(
-        output_processor = TakeFirst()
+        output_processor=TakeFirst()
     )
