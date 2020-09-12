@@ -3,16 +3,39 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item, Field
+from scrapy.loader.processors import TakeFirst
 
 
-class SetItem(scrapy.Item):
-    id = scrapy.Field()
-    spls = scrapy.Field()
+class SplItem(Item):
+    id = Field(
+        output_processor = TakeFirst()
+    )
+    set_id = Field(
+        output_processor = TakeFirst()
+    )
+    labeler = Field(
+        output_processor = TakeFirst()
+    )
+    schedule = Field(
+        output_processor = TakeFirst()
+    )
+    products = Field()
 
-class SplItem(scrapy.Item):
-    id = scrapy.Field()
-    ndcs = scrapy.Field()
 
-class NdcItem(scrapy.Item):
-    ndc = scrapy.Field()
+class ProductItem(Item):
+    code = Field(
+        output_processor = TakeFirst()
+    )
+    name = Field(
+        output_processor = TakeFirst()
+    )
+    active_ingredient = Field()
+    inactive_ingredient = Field()
+    packages = Field()
+
+
+class PackageItem(Item):
+    code = Field(
+        output_processor = TakeFirst()
+    )
