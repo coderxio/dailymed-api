@@ -1,0 +1,6 @@
+[flake8]
+exclude =
+    api/dailymed/migrations,
+    __pycache__,
+    api/api/settings.py,
+    api/api/manage.py

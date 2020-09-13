@@ -22,9 +22,16 @@ class JsonSpider(scrapy.Spider):
             product_il = ItemLoader(item=ProductItem(), selector=product)
             product_il.add_xpath('code', './manufacturedProduct/code/@code')
             product_il.add_xpath('name', './manufacturedProduct/name/text()')
-            #  product_il.add_xpath('active_ingredient', './/ingredient[starts-with(@classCode, "ACT")]/ingredientSubstance/name/text()')
-            #  product_il.add_xpath('inactive_ingredient', './/ingredient[starts-with(@classCode, "IACT")]/ingredientSubstance/name/text()')
-
+            """
+            product_il.add_xpath('active_ingredient',
+                                 './/ingredient[starts-with(\
+                                 @classCode, "ACT")]\
+                                 /ingredientSubstance/name/text()')
+            product_il.add_xpath('inactive_ingredient',
+                                 './/ingredient[starts-with(\
+                                 @classCode, "IACT")]\
+                                 /ingredientSubstance/name/text()')
+            """
             for package in product.xpath('.//containerPackagedProduct'):
                 package_il = ItemLoader(item=PackageItem(), selector=package)
                 package_il.add_xpath('code', './code/@code')
@@ -34,8 +41,6 @@ class JsonSpider(scrapy.Spider):
 
                 product_il.add_value('packages', package_il.load_item())
 
-
             spl_il.add_value('products', product_il.load_item())
-
 
         return spl_il.load_item()
