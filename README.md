@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/coderxio/dailymed-api.svg?branch=master)](https://travis-ci.org/coderxio/dailymed-api)
+[<img src="https://img.shields.io/badge/slack-@oresoftware/npp-yellow.svg?logo=slack">](https://coderx.slack.com) [![Build Status](https://travis-ci.org/coderxio/dailymed-api.svg?branch=master)](https://travis-ci.org/coderxio/dailymed-api)
 
 # DailyMed API
 
