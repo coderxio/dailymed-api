@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/coderxio/dailymed-api.svg?branch=master)](https://travis-ci.org/coderxio/dailymed-api)
+
 # DailyMed API
 
 This project uses poetry but its not necessary to install. It does require scrapy and python > 3.6.  This is really more of an experimental repo, there are a lot of caveats and really bugs with how this works but can serve as a starting point!
