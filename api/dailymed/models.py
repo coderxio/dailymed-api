@@ -34,7 +34,7 @@ class Product(models.Model):
     )
     inactive_ingredients = models.ManyToManyField(
         'InactiveIngredient',
-        related_name='prodcuts',
+        related_name='products',
     )
 
     def __str__(self):
