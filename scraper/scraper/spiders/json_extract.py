@@ -1,7 +1,7 @@
 import scrapy
 from scrapy.loader import ItemLoader
 from scraper.utils import get_filenames
-from scraper.items import SplItem, ProductItem, PackageItem
+from scraper.items import SplItem, ProductItem, PackageItem, InactiveIngredient
 
 
 class JsonSpider(scrapy.Spider):
@@ -22,16 +22,30 @@ class JsonSpider(scrapy.Spider):
             product_il = ItemLoader(item=ProductItem(), selector=product)
             product_il.add_xpath('code', './manufacturedProduct/code/@code')
             product_il.add_xpath('name', './manufacturedProduct/name/text()')
-            """
-            product_il.add_xpath('active_ingredient',
-                                 './/ingredient[starts-with(\
-                                 @classCode, "ACT")]\
-                                 /ingredientSubstance/name/text()')
-            product_il.add_xpath('inactive_ingredient',
-                                 './/ingredient[starts-with(\
-                                 @classCode, "IACT")]\
-                                 /ingredientSubstance/name/text()')
-            """
+
+            inactive_ingredients = product.xpath(
+                './/ingredient[starts-with(@classCode, "IACT")]'
+            )
+
+            for inactive_ingredient in inactive_ingredients:
+                inactive_il = ItemLoader(
+                    item=InactiveIngredient(),
+                    selector=inactive_ingredient,
+                )
+                inactive_il.add_xpath(
+                    'name',
+                    './ingredientSubstance/name/text()',
+                )
+                inactive_il.add_xpath(
+                    'unii',
+                    './ingredientSubstance/code/@code',
+                )
+
+                product_il.add_value(
+                    'inactive_ingredients',
+                    inactive_il.load_item(),
+                )
+
             for package in product.xpath('.//containerPackagedProduct'):
                 package_il = ItemLoader(item=PackageItem(), selector=package)
                 package_il.add_xpath('code', './code/@code')
