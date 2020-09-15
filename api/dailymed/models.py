@@ -32,9 +32,19 @@ class Product(models.Model):
         on_delete=models.PROTECT,
         related_name='products',
     )
+    inactive_ingredients = models.ManyToManyField(
+        'InactiveIngredient',
+        related_name='prodcuts',
+    )
 
     def __str__(self):
         return f"{self.code} -- {self.name} -- {self.spl}"
+
+
+class InactiveIngredient(models.Model):
+    """Inactive ingredient for each product"""
+    name = models.CharField(max_length=255)
+    unii = models.CharField(max_length=50)
 
 
 class Package(models.Model):
