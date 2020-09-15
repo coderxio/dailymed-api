@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from dailymed.models import Set, Spl, Product, Package
+from dailymed.models import Set, Spl, Product, InactiveIngredient, Package
 
 
 class PackageSerializer(serializers.ModelSerializer):
@@ -8,8 +8,15 @@ class PackageSerializer(serializers.ModelSerializer):
         exclude = ('product', )
 
 
+class InactiveIngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InactiveIngredient
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
     packages = PackageSerializer(many=True)
+    inactive_ingredients = InactiveIngredientSerializer(many=True)
 
     class Meta:
         model = Product
