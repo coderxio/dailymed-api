@@ -49,6 +49,7 @@ class InactiveIngredient(models.Model):
     def __str__(self):
         return f"{self.name} -- {self.unii}"
 
+
 class Package(models.Model):
     """Package level model"""
     code = models.CharField(max_length=20)
