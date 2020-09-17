@@ -5,6 +5,7 @@ class Set(models.Model):
     """DailyMed set model which can contain multiple spl files"""
     id = models.CharField(max_length=100, primary_key=True)
 
+    # Str method used for testing database creation in test.py
     def __str__(self):
         return self.id
 
