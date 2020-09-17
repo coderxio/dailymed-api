@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from rest_framework.test import APIClient
 
-from dailymed.models import Set, Spl, Product
+from dailymed.models import Set, Spl, Product, InactiveIngredient, Package
 
 
 def sample_data(**params):
@@ -64,3 +64,36 @@ class PublicApiTest(TestCase):
 
         expected_str = f"{product.code} -- {product.name} -- {product.spl}"
         self.assertEqual(str(product), expected_str)
+
+    def test_create_inactive_ingredient(self):
+        ingredient = InactiveIngredient.objects.create(
+            name="MICROCRYSTALLINE CELLULOSE",
+            unii="OP1R32D61U"
+        )
+
+        expected_str = f"{ingredient.name} -- {ingredient.unii}"
+        self.assertEqual(str(ingredient), expected_str)
+
+    def test_create_package(self):
+        data = sample_data()
+
+        set_obj = Set.objects.create(id=data['set_id'])
+        spl = Spl.objects.create(
+            id=data['id'],
+            set=set_obj,
+            labeler=data['labeler']
+        )
+
+        product = Product.objects.create(
+            code=data['products'][0]['code'],
+            name=data['products'][0]['name'],
+            spl=spl
+        )
+
+        package = Package.objects.create(
+            code="0093-0832-01",
+            product=product
+        )
+
+        expected_str = f"{package.code} -- {package.product}"
+        self.assertEqual(str(package), expected_str)

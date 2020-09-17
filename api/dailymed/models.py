@@ -46,6 +46,8 @@ class InactiveIngredient(models.Model):
     name = models.CharField(max_length=255)
     unii = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f"{self.name} -- {self.unii}"
 
 class Package(models.Model):
     """Package level model"""
@@ -55,3 +57,6 @@ class Package(models.Model):
         on_delete=models.PROTECT,
         related_name='packages'
     )
+
+    def __str__(self):
+        return f"{self.code} -- {self.product}"
