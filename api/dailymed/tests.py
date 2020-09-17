@@ -91,7 +91,7 @@ class PublicApiTest(TestCase):
         )
 
         package = Package.objects.create(
-            code="0093-0832-01",
+            code=data['products'][0]['packages'][0]['code'],
             product=product
         )
 
