@@ -24,7 +24,7 @@ class JsonSpider(scrapy.Spider):
             product_il.add_xpath('name', './manufacturedProduct/name/text()')
             product_il.add_xpath(
                 'schedule',
-                '//policy[@classCode="DEADrugSchedule"]/code/@displayName'
+                './/policy[@classCode="DEADrugSchedule"]/code/@displayName'
             )
 
             inactive_ingredients = product.xpath(
