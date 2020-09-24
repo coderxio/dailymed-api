@@ -40,7 +40,7 @@ class Product(models.Model):
     )
 
     def __str__(self):
-        return f"{self.code} -- {self.name} -- {self.spl}"
+        return f"{self.code} -- {self.name} -- {self.schedule} -- {self.spl}"
 
 
 class InactiveIngredient(models.Model):
