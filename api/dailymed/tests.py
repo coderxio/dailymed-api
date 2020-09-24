@@ -71,7 +71,8 @@ class DatabaseTest(TestCase):
             spl=spl
         )
 
-        expected_str = f"{product.code} -- {product.name} -- {product.schedule} -- {product.spl}"
+        expected_str = f"{product.code} -- {product.name} -- " \
+            f"{product.schedule} -- {product.spl}"
         self.assertEqual(str(product), expected_str)
 
     def test_create_inactive_ingredient(self):
@@ -125,6 +126,7 @@ class PublicApiTest(TestCase):
         product = Product.objects.create(
             code=data['products'][0]['code'],
             name=data['products'][0]['name'],
+            schedule=data['products'][0]['name'],
             spl=spl
         )
         package = Package.objects.create(
