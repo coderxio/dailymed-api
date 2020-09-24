@@ -3,7 +3,7 @@ import zipfile
 from pathlib import Path
 
 
-def extract()
+def extract():
     cwd = Path(__file__).parent.absolute()
     data_dir = cwd / 'data'
     partial_dir = data_dir / 'partial'
@@ -28,6 +28,7 @@ def extract()
                 for unzip_file in nested_zip.namelist():
                     if unzip_file.endswith('xml'):
                         nested_zip.extract(unzip_file, partial_dir)
+
 
 if __name__ == '__main__':
     extract()
