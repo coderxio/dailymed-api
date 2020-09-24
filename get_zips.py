@@ -1,5 +1,8 @@
 import urllib.request as request
 from pathlib import Path
+import os
+
+from extract_zips import extract
 
 
 cwd = Path(__file__).parent.absolute()
@@ -14,6 +17,9 @@ try:
                 f'ftp://public.nlm.nih.gov/nlmdata/.dailymed/dm_spl_release_human_rx_part{i}.zip') as r, open(  # noqa: E501
                     f'{data_dir}/spl_part{i}.zip', 'wb') as f:
             f.write(r.read())
+        extract()
+        os.remove(f'{data_dir}/spl_part{i}.zip')
+
 except Exception as err:
     raise (f"Unable to perform request: {err}")
 finally:
