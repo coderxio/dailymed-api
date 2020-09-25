@@ -17,6 +17,7 @@ def sample_data(**params):
                'products': [{'active_ing': ['DULOXETINE HYDROCHLORIDE'],
                              'code': '70518-0343',
                              'name': 'Duloxetine',
+                             'schedule': 'legend',
                              'packages': [{'code': '70518-0343-0'},
                             {'code': '70518-0343-1'}]}],
                'set_id': '78a5056b-23dc-4897-8909-77eacdedd27b'}
@@ -66,10 +67,12 @@ class DatabaseTest(TestCase):
         product = Product.objects.create(
             code=data['products'][0]['code'],
             name=data['products'][0]['name'],
+            schedule=data['products'][0]['schedule'],
             spl=spl
         )
 
-        expected_str = f"{product.code} -- {product.name} -- {product.spl}"
+        expected_str = f"{product.code} -- {product.name} -- " \
+            f"{product.schedule} -- {product.spl}"
         self.assertEqual(str(product), expected_str)
 
     def test_create_inactive_ingredient(self):
@@ -123,6 +126,7 @@ class PublicApiTest(TestCase):
         product = Product.objects.create(
             code=data['products'][0]['code'],
             name=data['products'][0]['name'],
+            schedule=data['products'][0]['name'],
             spl=spl
         )
         package = Package.objects.create(

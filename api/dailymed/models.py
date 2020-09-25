@@ -28,6 +28,7 @@ class Product(models.Model):
     """Product level model"""
     code = models.CharField(max_length=20)
     name = models.CharField(max_length=255)
+    schedule = models.CharField(max_length=10)
     spl = models.ForeignKey(
         Spl,
         on_delete=models.PROTECT,
@@ -39,7 +40,7 @@ class Product(models.Model):
     )
 
     def __str__(self):
-        return f"{self.code} -- {self.name} -- {self.spl}"
+        return f"{self.code} -- {self.name} -- {self.schedule} -- {self.spl}"
 
 
 class InactiveIngredient(models.Model):

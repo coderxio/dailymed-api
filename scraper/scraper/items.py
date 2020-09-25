@@ -33,6 +33,9 @@ class ProductItem(Item):
     active_ingredients = Field()
     inactive_ingredients = Field()
     packages = Field()
+    schedule = Field(
+        output_processor=TakeFirst()
+    )
 
 
 class InactiveIngredient(Item):
