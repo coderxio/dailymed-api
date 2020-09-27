@@ -13,7 +13,7 @@ parser.add_argument(
             metavar='u',
             default='-1',
             type=int,
-            help='Number of files to extract from SPL zip'
+            help='Optional number of files to extract from SPL zip.'
         )
 download_or_select = parser.add_mutually_exclusive_group()
 download_or_select.add_argument(
@@ -21,13 +21,13 @@ download_or_select.add_argument(
                     metavar='d',
                     default='4',
                     type=int,
-                    help='Number of SPL files to download, max 4'
+                    help='Optional number of SPL files to download, max 4.'
                 )
 download_or_select.add_argument(
                     '--select',
                     metavar='s',
                     type=int,
-                    help="Specific SPL file to download, i.e. 1, 2, 3 or 4"
+                    help="Optional SPL file to download, i.e. 1, 2, 3 or 4"
                 )
 
 args = parser.parse_args()
