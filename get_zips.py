@@ -21,19 +21,19 @@ download_or_select.add_argument(
                     metavar='d',
                     default='4',
                     type=int,
-                    help='Optional number of SPL files to download, max 4.'
+                    help='Optional number of zip files to download, max 4.'
                 )
 download_or_select.add_argument(
                     '--select',
                     metavar='s',
                     type=int,
-                    help="Optional SPL file to download, i.e. 1, 2, 3 or 4"
+                    help="Optional zip file to download, i.e. 1, 2, 3 or 4"
                 )
 
 args = parser.parse_args()
 depth = args.unzip
 number = args.download
-spl = args.select
+spl_zip = args.select
 
 
 cwd = Path(__file__).parent.absolute()
@@ -43,13 +43,13 @@ if not data_dir.exists():
     data_dir.mkdir(exist_ok=True)
 
 try:
-    if spl:
+    if spl_zip:
         with request.urlopen(
-                    f'ftp://public.nlm.nih.gov/nlmdata/.dailymed/dm_spl_release_human_rx_part{spl}.zip') as r, open(  # noqa: E501
-                        f'{data_dir}/spl_part{spl}.zip', 'wb') as f:
+                    f'ftp://public.nlm.nih.gov/nlmdata/.dailymed/dm_spl_release_human_rx_part{spl_zip}.zip') as r, open(  # noqa: E501
+                        f'{data_dir}/spl_part{spl_zip}.zip', 'wb') as f:
             shutil.copyfileobj(r, f)
         extract(depth)
-        os.remove(f'{data_dir}/spl_part{spl}.zip')
+        os.remove(f'{data_dir}/spl_part{spl_zip}.zip')
     elif number == 4:
         for i in range(1, 5):
             with request.urlopen(
