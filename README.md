@@ -4,12 +4,6 @@
 
 This project uses poetry but its not necessary to install. It does require scrapy and python > 3.6.  This is really more of an experimental repo, there are a lot of caveats and really bugs with how this works but can serve as a starting point!
 
-#### Docker Development Usage
-##### This method is intended for internal testing only.  It has not been secured for external access.
-
-1. Run `docker-compose up -d` to bring up the Django API
-2. Run `docker-compose exec api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"` to load the database.
-
 #### Usage
 
 1. Create data dir
@@ -31,3 +25,9 @@ In order to use django models within scrapy the `PYTHONPATH` env variable must b
 
 1. cd into the `api/` dir and execute `./manage.py runserver 0.0.0.0:8000` to start the API server
 2. In a web browser, open up `localhost:8000`
+
+#### Docker Development Usage
+##### This method is intended for internal testing only.  It has not been secured for external access.
+
+1. Run `docker-compose up -d` to bring up the Django API
+2. Run `docker-compose exec api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"` to load the database. An alternate command is `docker exec -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract``
