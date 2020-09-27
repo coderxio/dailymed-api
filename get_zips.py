@@ -21,13 +21,13 @@ download_or_select.add_argument(
                     metavar='d',
                     default='4',
                     type=int,
-                    help='Optional number of zip files to download, max 4.'
+                    help='Optional number of SPL zip files to download, max 4.'
                 )
 download_or_select.add_argument(
                     '--select',
                     metavar='s',
                     type=int,
-                    help="Optional spl zip file to download, i.e. 1, 2, 3 or 4"
+                    help="Optional SPL zip file to download, i.e. 1, 2, 3 or 4"
                 )
 
 args = parser.parse_args()
