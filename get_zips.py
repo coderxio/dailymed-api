@@ -27,7 +27,7 @@ download_or_select.add_argument(
                     '--select',
                     metavar='s',
                     type=int,
-                    help="Optional zip file to download, i.e. 1, 2, 3 or 4"
+                    help="Optional spl zip file to download, i.e. 1, 2, 3 or 4"
                 )
 
 args = parser.parse_args()
@@ -50,23 +50,14 @@ try:
             shutil.copyfileobj(r, f)
         extract(depth)
         os.remove(f'{data_dir}/spl_part{spl_zip}.zip')
-    elif number == 4:
-        for i in range(1, 5):
+    else:
+        for i in range(1, number+1):
             with request.urlopen(
                     f'ftp://public.nlm.nih.gov/nlmdata/.dailymed/dm_spl_release_human_rx_part{i}.zip') as r, open(  # noqa: E501
                         f'{data_dir}/spl_part{i}.zip', 'wb') as f:
                 shutil.copyfileobj(r, f)
             extract(depth)
             os.remove(f'{data_dir}/spl_part{i}.zip')
-    elif number < 4:
-        for i in range(1, number):
-            with request.urlopen(
-                        f'ftp://public.nlm.nih.gov/nlmdata/.dailymed/dm_spl_release_human_rx_part{i}.zip') as r, open(  # noqa: E501
-                            f'{data_dir}/spl_part{i}.zip', 'wb') as f:
-                shutil.copyfileobj(r, f)
-            extract(depth)
-            os.remove(f'{data_dir}/spl_part{i}.zip')
-
 
 except Exception as err:
     raise (f"Unable to perform request: {err}")
