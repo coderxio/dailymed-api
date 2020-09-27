@@ -17,3 +17,8 @@ COPY . ./
 ENV PYTHONPATH=/dailymed-api/api
 
 RUN poetry install
+
+RUN chown -R www-data:www-data /dailymed-api
+RUN chmod -R 750 /dailymed-api
+
+USER www-data
