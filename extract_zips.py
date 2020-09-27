@@ -31,4 +31,4 @@ def extract(depth=-1):
 
 
 if __name__ == '__main__':
-    extract(depth)
+    extract()
