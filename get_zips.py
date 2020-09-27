@@ -8,7 +8,7 @@ from extract_zips import extract
 
 
 parser = argparse.ArgumentParser(description="Download and unzip SPL data.")
-parser.add_argument('--unzip', metavar='u', default='-1', type=int, help='Number of files to unzip from SPL')
+parser.add_argument('--unzip', metavar='u', default='-1', type=int, help='Number of files to extract from SPL zip')
 download_or_select = parser.add_mutually_exclusive_group()
 download_or_select.add_argument('--download', metavar='d', default='4', type=int, help='Number of SPL files to download, max 4')
 download_or_select.add_argument('--select', metavar='s', type=int, help="Specific SPL file to download, i.e. 1, 2, 3 or 4")
