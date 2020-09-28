@@ -5,6 +5,8 @@ services:
   api:
     build:
       context: .
+      args:
+        user1: root
     container_name: dailymed-api
     command: >
       sh -c 'python ./api/manage.py migrate &&\
