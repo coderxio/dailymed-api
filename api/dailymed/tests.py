@@ -151,7 +151,7 @@ class PublicApiTest(TestCase):
         serializer = SplSerializer(self.spl)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertIn(serializer.data, res.data)
+        self.assertIn(serializer.data, res.data['results'])
 
     def test_retrieve_product(self):
         """Test retriving a product"""
@@ -160,7 +160,7 @@ class PublicApiTest(TestCase):
         serializer = ProductSerializer(self.product)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertIn(serializer.data, res.data)
+        self.assertIn(serializer.data, res.data['results'])
 
     def test_retrieve_package(self):
         """Test retriving a package"""
@@ -169,4 +169,4 @@ class PublicApiTest(TestCase):
         serializer = PackageSerializer(self.package)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertIn(serializer.data, res.data)
+        self.assertIn(serializer.data, res.data['results'])
