@@ -18,7 +18,9 @@ ENV PYTHONPATH=/dailymed-api/api
 
 RUN poetry install
 
-RUN chown -R www-data:www-data /dailymed-api
+ARG user1=www-data
+
+RUN chown -R ${user1}:${user1} /dailymed-api
 RUN chmod -R 750 /dailymed-api
 
-USER www-data
+USER ${user1}
