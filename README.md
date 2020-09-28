@@ -30,4 +30,4 @@ In order to use django models within scrapy the `PYTHONPATH` env variable must b
 ##### This method is intended for internal testing only.  It has not been secured for external access.
 
 1. Run `docker-compose up -d` to bring up the Django API
-2. Run `docker-compose exec api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"` to load the database. An alternate command is `docker exec -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract``
+2. Run `docker-compose exec api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"` to load the database. An alternate command is `docker exec -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract`
