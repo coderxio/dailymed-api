@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+  api:
+    build:
+      context: .
+    container_name: dailymed-api
+    working_dir: /dailymed-api/api
+    command: >
+      sh -c 'python ./manage.py migrate &&\
+             python ./manage.py collectstatic --noinput &&\
+             gunicorn api.wsgi --bind 0.0.0.0:8000'
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/dailymed-api
+      - ./data:/dailymed-api/data
+      - /var/www/:/var/www/
