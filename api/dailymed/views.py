@@ -18,7 +18,7 @@ class SetViewSet(
 class SplViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
-    queryset = Spl.objects.all()
+    queryset = Spl.objects.all().distinct()
     serializer_class = SplSerializer
     filterset_class = SplFilter
 
