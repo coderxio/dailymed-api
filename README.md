@@ -26,8 +26,24 @@ In order to use django models within scrapy the `PYTHONPATH` env variable must b
 1. cd into the `api/` dir and execute `./manage.py runserver 0.0.0.0:8000` to start the API server
 2. In a web browser, open up `localhost:8000`
 
+### Docker Containers
 #### Docker Development Usage
-##### This method is intended for internal testing only.  It has not been secured for external access.
-
+**This method is intended for internal testing only.  It has not been secured for external access.**
+##### Steps:
 1. Run `docker-compose up -d` to bring up the Django API
 2. Run `docker-compose exec api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"` to load the database. An alternate command is `docker exec -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract`
+
+#### Docker Production Usage
+**This method is for using docker-compose.prod.yml**
+##### Prep:
+- Update secret in Django settings.py
+- Disable debug mode in Django settings.py
+- Install & configure Nginx to serve static folder and proxy Gunicorn
+##### Steps:
+1. Create directory `mkdir /opt/dailymed`
+2. Change owner `chown www-data:www-data /opt/dailymed`
+3. Change directory `cd /opt/dailymed`
+4. Clone repo `sudo -u www-data git clone https://github.com/coderxio/dailymed-api`.  An alternative command is `git clone https://github.com/coderxio/dailymed-api && chown -R www-data:www-data /opt/dailymed`
+5. Change directory `cd dailymed-api`
+6. Run `docker-compose -f docker-compose.build.yaml up --build -d`
+7. Run `docker-compose exec api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"` to load the database. An alternate command is `docker exec -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract`
