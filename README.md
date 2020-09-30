@@ -10,6 +10,10 @@
 ### Docker Containers
 #### Docker Development Usage
 **This method is intended for internal testing only.  It has not been secured for external access.**
+##### Prep:
+- Download SPL zip files `python3 get_zips.py`  
+   Example parameter to download SPL zip 4 and unpack 100 SPL files `python3 get_zips.py --select 4 --unzip 100`  
+   For further assistance `python3 get_zips.py -h`
 ##### Steps:
 1. Create docker container `docker-compose up -d` to bring up the Django API
 2. Optional: load the database `docker-compose exec -d api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"`  
