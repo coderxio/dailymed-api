@@ -21,6 +21,7 @@
 - Update secret in Django settings.py
 - Disable debug mode in Django settings.py
 - Install & configure Nginx to serve static folder and proxy Gunicorn
+- Download SPL zip files `sudo -u www-data python3 get_zips.py`
 ##### Steps:
 1. Create directory `mkdir /opt/dailymed`
 2. Change owner `chown www-data:www-data /opt/dailymed`
