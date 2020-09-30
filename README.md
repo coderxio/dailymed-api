@@ -5,7 +5,7 @@
 ### Endpoint(s)
 - [/SPL](http://api.coderx.io/spl)  
    Filter by set_id, labeler, package_ndc, product_ndc, product_name, inactive_ingredient_name, inactive_ingredient_unii or schedule  
-   Example filter by schedule: http://api.coderx.io/spl/?schedule=ciii
+   Example filter by schedule: http://api.coderx.io/spl/?schedule=CIII
 
 ### Docker Containers
 #### Docker Development Usage
