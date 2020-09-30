@@ -8,6 +8,7 @@ from dailymed.serializers import (
 )
 from dailymed.filters import SplFilter
 
+
 class SetViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
@@ -18,7 +19,7 @@ class SetViewSet(
 class SplViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
-    queryset = Spl.objects.all().distinct()
+    queryset = Spl.objects.all()
     serializer_class = SplSerializer
     filterset_class = SplFilter
 
