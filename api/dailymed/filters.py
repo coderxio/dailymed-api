@@ -10,6 +10,7 @@ SCHEDULE_CHOICES = (
     ('CV', 'CV')
 )
 
+
 class SplFilter(filters.FilterSet):
     set_id = filters.CharFilter(
         field_name='set__id',
@@ -24,7 +25,7 @@ class SplFilter(filters.FilterSet):
         lookup_expr='icontains',
         distinct=True)
     product_ndc = filters.CharFilter(
-        field_name='products__code', 
+        field_name='products__code',
         lookup_expr='icontains',
         distinct=True)
     product_name = filters.CharFilter(
