@@ -46,11 +46,9 @@ This project uses poetry but its not necessary to install. It does require scrap
 In order to use django models within scrapy the `PYTHONPATH` env variable must be set. To set this env var use, run `export PYTHONPATH=/home/<your-user-name>/path/to/django/project`. As an example to set this on my ubuntu machine I would run `export PYTHONPATH=/home/yevgeny/workspace/dailymed-api/api`. In future iterations of this repo, this process will be automated. 
 
 #### Django Usage
-
 1. cd into the `api/` dir and execute `./manage.py migrate` to create a sqlite db.
 2. cd into the `scraper/` dir and run `scrapy crawl json_extract` to populate the db.
 
 ### Django Rest Framework API Usage
-
 1. cd into the `api/` dir and execute `./manage.py runserver 0.0.0.0:8000` to start the API server
 2. In a web browser, open up `localhost:8000`
