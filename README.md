@@ -3,7 +3,7 @@
 # DailyMed API
 ## Available at [api.coderx.io](http://api.coderx.io)
 ### Endpoint(s)
-- [/SPL](http://api.coderx.io/spl)
+- [/SPL](http://api.coderx.io/spl)  
    Filter by set_id, labeler, package_ndc, product_ndc, product_name, inactive_ingredient_name, inactive_ingredient_unii or schedule  
    Example filter by schedule: http://api.coderx.io/spl/?schedule=ciii
 
@@ -25,7 +25,7 @@
 1. Create directory `mkdir /opt/dailymed`
 2. Change owner `chown www-data:www-data /opt/dailymed`
 3. Change directory `cd /opt/dailymed`
-4. Clone repo `sudo -u www-data git clone https://github.com/coderxio/dailymed-api`
+4. Clone repo `sudo -u www-data git clone https://github.com/coderxio/dailymed-api`  
    An alternative command is `git clone https://github.com/coderxio/dailymed-api && chown -R www-data:www-data /opt/dailymed`  
 5. Change directory `cd dailymed-api`
 6. Create docker container `docker-compose -f docker-compose.prod.yaml up --build -d`
