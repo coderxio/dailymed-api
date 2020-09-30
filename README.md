@@ -13,7 +13,7 @@
 ##### Steps:
 1. Create docker container `docker-compose up -d` to bring up the Django API
 2. Optional: load the database `docker-compose exec -d api sh -c "cd /dailymed-api/scraper/ && scrapy crawl json_extract"`  
-   An alternate command is `docker exec -d -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract`
+   An alternative command is `docker exec -d -it -w /dailymed-api/scraper dailymed-api scrapy crawl json_extract`
 
 #### Docker Production Usage
 **This method is for using docker-compose.prod.yml**
