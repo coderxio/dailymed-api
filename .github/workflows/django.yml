@@ -12,16 +12,16 @@ jobs:
         python-version: [3.7, 3.8]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Code
+      uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Poetry
-      run: |
-        pip install poetry
-    - name: Install Dependencies
-      run: |
+      uses: Gr1N/setup-poetry@v3
+    -name: Install Dependencies
+     run: |
         poetry install
     - name: Run Tests
       run: |
