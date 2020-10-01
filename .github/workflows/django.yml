@@ -22,6 +22,6 @@ jobs:
       uses: knowsuchagency/poetry-install@v2
     - name: Run Tests
       run: |
+        pwd
         echo "${pwd}" >> $GITHUB_PATH
-        cd api/
-        python manage.py test
+        python api/manage.py test
