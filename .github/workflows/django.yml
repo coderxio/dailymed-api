@@ -23,5 +23,5 @@ jobs:
     - name: Run Tests
       run: |
         pwd
-        # echo "${pwd}" >> $GITHUB_PATH
+        echo "${pwd}" >> $GITHUB_PATH
         # python api/manage.py test
