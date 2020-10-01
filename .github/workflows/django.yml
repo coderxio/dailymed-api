@@ -21,7 +21,7 @@ jobs:
     - name: Poetry Install
       uses: knowsuchagency/poetry-install@v2
     - name: Run Tests
-      working_dir: ./api
+      working-directory: ./api
       run: |
         echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
         python api/manage.py test
