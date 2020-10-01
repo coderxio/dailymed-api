@@ -20,8 +20,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install Poetry
       uses: Gr1N/setup-poetry@v3
-    -name: Install Dependencies
-     run: poetry install
+    - name: Install Dependencies
+      run: poetry install
     - name: Run Tests
       run: |
         echo "${pwd}" >> $GITHUB_PATH
