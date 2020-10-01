@@ -24,4 +24,4 @@ jobs:
       working-directory: ./api
       run: |
         echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
-        python api/manage.py test
+        python manage.py test
