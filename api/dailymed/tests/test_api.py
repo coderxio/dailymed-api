@@ -64,7 +64,7 @@ class PublicApiTest(TestCase):
                     product_obj.packages.create(**package_data)
 
     def test_retrieve_spls(self):
-        """Test retriving a spl"""
+        """Test retrieving spls"""
         res = self.client.get(
             SPL_URL,
             format='json'
@@ -76,22 +76,22 @@ class PublicApiTest(TestCase):
         self.assertEqual(serializer.data, res.data['results'])
 
     def test_retrieve_spls_filter_by_set(self):
-        """Test retriving a spl by set filter"""
-        set = Set.objects.first()
+        """Test retrieving a spl by set filter"""
+        set_id = Set.objects.first()
         res = self.client.get(
             SPL_URL,
-            {'set_id': set.id},
+            {'set_id': set_id.id},
             format='json')
 
         serializer = SplSerializer(
-            Spl.objects.filter(set__id=set.id), many=True
+            Spl.objects.filter(set__id=set_id.id), many=True
             )
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(serializer.data, res.data['results'])
 
     def test_retrieve_spls_filter_by_inactive_ing(self):
-        """Test retriving a spl by inactive ingredient filter"""
+        """Test retrieving a spl by inactive ingredient filter"""
         inactive_ing = 'alcohol'
         res = self.client.get(
             SPL_URL,
@@ -109,7 +109,7 @@ class PublicApiTest(TestCase):
         self.assertEqual(serializer.data, res.data['results'])
 
     def test_retrieve_spls_filter_by_schedule(self):
-        """Test retriving a spl by schedule filter"""
+        """Test retrieving spls by schedule filter"""
         schedule = 'CIV'
         res = self.client.get(
             SPL_URL,
@@ -125,7 +125,7 @@ class PublicApiTest(TestCase):
         self.assertEqual(serializer.data, res.data['results'])
 
     def test_retrieve_spls_filter_by_drug_name(self):
-        """Test retriving a spl by drug name filter"""
+        """Test retrieving spls by drug name filter"""
         name = 'Ciprofloxacin'
         res = self.client.get(
             SPL_URL,
@@ -138,4 +138,27 @@ class PublicApiTest(TestCase):
         )
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, res.data['results'])
+
+    def test_retrieve_spls_filter_by_complex(self):
+        """Test retrieving spls filtered by set & inactive ingredient"""
+        set_id = 'b88efb93-f1d1-4606-a669-6896f432a27f'
+        inactive_ing = 'alcohol'
+        res = self.client.get(
+            SPL_URL,
+            {'set_id': set_id,
+             'inactive_ingredient_name': inactive_ing},
+            format='json'
+        )
+
+        serializer = SplSerializer(
+            Spl.objects.filter(
+                products__inactive_ingredients__name__icontains=inactive_ing,
+                set__id=set_id)
+            .distinct(),
+            many=True
+        )
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(res.data['results']), 1)
         self.assertEqual(serializer.data, res.data['results'])
