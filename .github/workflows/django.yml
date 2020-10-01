@@ -23,5 +23,5 @@ jobs:
     - name: Run Tests
       working-directory: ./api
       run: |
-        export PYTHONPATH=$PYTHONPATH:home/runner/work/dailymed-api/dailymed-api
+        echo "::add-path::/home/runner/work/dailymed-api/dailymed-api"
         python manage.py test
