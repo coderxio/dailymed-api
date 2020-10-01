@@ -20,8 +20,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Poetry Install
       uses: knowsuchagency/poetry-install@v2
+      run: echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
     - name: Run Tests
       working-directory: ./api
       run: |
-        echo "::add-path::/home/runner/work/dailymed-api/dailymed-api"
         python manage.py test
