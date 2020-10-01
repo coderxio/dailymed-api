@@ -69,6 +69,7 @@ class DatabaseTest(TestCase):
         self.assertNotEqual(str(obj2), expected_str1)
 
     def test_create_product(self):
+        """Test creation of product in db"""
         obj1 = Product.objects.first()
         obj2 = Product.objects.last()
 
@@ -78,6 +79,7 @@ class DatabaseTest(TestCase):
         self.assertNotEqual(str(obj2), expected_str1)
 
     def test_create_inactive_ingredient(self):
+        """Test creation of inactive ingredient in db"""
         obj1 = InactiveIngredient.objects.first()
         obj2 = InactiveIngredient.objects.last()
 
@@ -86,6 +88,7 @@ class DatabaseTest(TestCase):
         self.assertNotEqual(str(obj2), expected_str1)
 
     def test_create_package(self):
+        """Test creation of package in db"""
         obj1 = Package.objects.first()
         obj2 = Package.objects.last()
 
