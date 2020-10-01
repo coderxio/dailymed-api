@@ -25,4 +25,5 @@ jobs:
     - name: Run Tests
       run: |
         echo "${pwd}" >> $GITHUB_PATH
+        cd api/
         python manage.py test
