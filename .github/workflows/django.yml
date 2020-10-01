@@ -18,9 +18,11 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Poetry Install
-      uses: knowsuchagency/poetry-install@v2
-      run: echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
+      run: |
+        pip install -U pip
+        pip install poetry
+        poetry install
+        echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
     - name: Run Tests
       working-directory: ./api
       run: |
