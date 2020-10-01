@@ -23,6 +23,8 @@ jobs:
         pip install poetry
         poetry install
         echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
+        echo "::add-path::/home/runner/work/dailymed-api/dailymed-api"
+        echo "::set-env name=PYTHONPATH::home/runner/work/dailymed-api/dailymed-api"
     - name: Run Tests
       working-directory: ./api
       run: |
