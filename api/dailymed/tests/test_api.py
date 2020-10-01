@@ -109,7 +109,7 @@ class PublicApiTest(TestCase):
         self.assertEqual(serializer.data, res.data['results'])
 
     def test_retrieve_spls_filter_by_schedule(self):
-        """Test retriving a spl by schdule filter"""
+        """Test retriving a spl by schedule filter"""
         schedule = 'CIV'
         res = self.client.get(
             SPL_URL,
@@ -118,6 +118,22 @@ class PublicApiTest(TestCase):
 
         serializer = SplSerializer(Spl.objects.filter(
             products__schedule=schedule).distinct(),
+            many=True
+        )
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(serializer.data, res.data['results'])
+
+    def test_retrieve_spls_filter_by_drug_name(self):
+        """Test retriving a spl by drug name filter"""
+        name = 'Ciprofloxacin'
+        res = self.client.get(
+            SPL_URL,
+            {'product_name': name},
+            format='json')
+
+        serializer = SplSerializer(Spl.objects.filter(
+            products__name=name).distinct(),
             many=True
         )
 
