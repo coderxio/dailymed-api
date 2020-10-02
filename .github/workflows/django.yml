@@ -28,4 +28,4 @@ jobs:
         echo "/home/runner/work/dailymed-api" >> $GITHUB_PATH
         echo "::add-path::/home/runner/work/dailymed-api/"
         echo "::set-env name=PYTHONPATH::home/runner/work/dailymed-api"
-        python manage.py test
+        python3 manage.py test
