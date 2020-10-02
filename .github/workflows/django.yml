@@ -25,7 +25,8 @@ jobs:
     - name: Run Tests
       working-directory: ./api
       run: |
-        echo "/home/runner/work/dailymed-api/dailymed-api" >> $GITHUB_PATH
-        echo "::add-path::/home/runner/work/dailymed-api/dailymed-api"
+        pwd
+        echo "/home/runner/work/dailymed-api/dailymed-api/dailymed-api/api" >> $GITHUB_PATH
+        echo "::add-path::/home/runner/work/dailymed-api/dailymed-api/dailymed-api/api"
         echo "::set-env name=PYTHONPATH::/home/runner/work/dailymed-api/dailymed-api/api"
         python3 manage.py test
