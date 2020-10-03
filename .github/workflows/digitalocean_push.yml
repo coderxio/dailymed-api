@@ -1,0 +1,38 @@
+name: Deployment
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    deploy:
+    
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout Code
+          uses: actions/checkout@v2
+
+        - name: Update
+          if: ${{ contains(github.event.pull_request.labels.*.name, 'App Only') }}
+          uses: appleboy/scp-action@master
+          env:
+            HOST: ${{ secrets.HOST }}
+            USERNAME: ${{ secrets.USERNAME }}
+            KEY: ${{ secrets.SSH_KEY }}
+          with:
+            source: "."
+            target: /opt/dailymed/dailymed-api/
+
+        - name: Deploy
+          if: ${{ contains( github.event.pull_request.labels.*.name, 'App Only') }}
+          uses: appleboy/ssh-action@master
+          with:
+            HOST: ${{ secrets.HOST }}
+            USERNAME: ${{ secrets.USERNAME }}
+            KEY: ${{ secrets.SSH_KEY }}
+            script: |
+              chown -R www-data:www-data /opt/dailymed
+              cd /opt/dailymed/dailymed-api
+              docker-compose -f docker-compose.prod.yml up --build -d

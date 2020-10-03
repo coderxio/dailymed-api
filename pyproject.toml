@@ -5,7 +5,7 @@ description = ""
 authors = ["Yevgeny Bulochnik <yevgeny.bulochnik@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
 ipython = "^7.16.1"
 scrapy = "^2.2.1"
 djangorestframework = "^3.11.1"
