@@ -36,7 +36,7 @@ jobs:
       run: poetry install
 
     - name: Activate venv
-      run: echo ${{ env.VIRTUAL_ENV }} >> $GITHUB_PATH
+      run: echo ${{ env.VIRTUAL_ENV }}/bin >> $GITHUB_PATH
 
     - name: List app dependencies
       run: pip list
