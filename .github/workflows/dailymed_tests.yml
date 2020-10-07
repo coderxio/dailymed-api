@@ -23,7 +23,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Setup
+    - name: Install poetry
       run: pip install poetry
 
     - name: List current host python installed dependencies
