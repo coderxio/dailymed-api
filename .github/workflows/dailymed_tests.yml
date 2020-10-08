@@ -9,7 +9,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7.9, 3.8]
+        python-version: [ 3.8 ]
 
     env:
       VIRTUAL_ENV: /opt/venv
@@ -41,8 +41,8 @@ jobs:
     - name: List app dependencies
       run: pip list
 
-    - name: Styling
-      run: flake8
-
     - name: Test
       run: ./api/manage.py test
+
+    - name: Styling
+      run: flake8
