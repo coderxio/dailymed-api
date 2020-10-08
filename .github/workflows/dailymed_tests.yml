@@ -9,7 +9,10 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.7.9, 3.8]
+        python-version: [ 3.8 ]
+
+    env:
+      VIRTUAL_ENV: /opt/venv
 
     steps:
     - name: Checkout Code
@@ -20,23 +23,26 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Setup
+    - name: Install poetry
       run: pip install poetry
 
-    - name: Create venv
-      uses: gabrielfalcao/pyenv-action@v5
-      with:
-        default: ${{ matrix.python }}
-  
-    - name: Install dependencies
-      run: |
-        poetry config virtualenvs.create false
-        poetry install
+    - name: List current host python installed dependencies
+      run: pip list
 
-    - name: Styling
-      run: |
-        flake8
+    - name: Create venv
+      run: python -m venv $VIRTUAL_ENV
+
+    - name: Install app dependencies with poetry
+      run: poetry install
+
+    - name: Activate venv
+      run: echo ${{ env.VIRTUAL_ENV }}/bin >> $GITHUB_PATH
+
+    - name: List app dependencies
+      run: pip list
 
     - name: Test
-      run: |
-        python3 api/manage.py test api/
+      run: ./api/manage.py test
+
+    - name: Styling
+      run: flake8
