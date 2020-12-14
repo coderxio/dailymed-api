@@ -42,7 +42,7 @@ jobs:
       run: pip list
 
     - name: Test
-      run: ./api/manage.py test
+      run: ./api/manage.py test api
 
     - name: Styling
       run: flake8

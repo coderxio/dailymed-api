@@ -1,4 +1,4 @@
-[<img src="https://img.shields.io/badge/slack-@CodeRx-blue.svg?logo=slack">](https://coderx.slack.com) [![Build Status](https://travis-ci.org/coderxio/dailymed-api.svg?branch=master)](https://travis-ci.org/coderxio/dailymed-api)
+[<img src="https://img.shields.io/badge/slack-@CodeRx-blue.svg?logo=slack">](https://coderx.slack.com) ![Test Status](https://github.com/coderxio/dailymed-api/workflows/Tests/badge.svg)
 
 # DailyMed API
 ## Available at [api.coderx.io](http://api.coderx.io)
