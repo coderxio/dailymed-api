@@ -5,6 +5,9 @@
 
 
 # useful for handling different item types with a single interface
+import csv
+
+from scraper.utils import get_rxnorm
 from dailymed.models import Set, InactiveIngredient
 
 
@@ -43,3 +46,18 @@ class ScraperPipeline:
                 product.packages.create(**package_data)
 
         return item
+
+    def close_spider(self, spider):
+        print("loading rxnorm data")
+        columns = ['setId', 'splVersion', 'rxcui', 'rxstring', 'rxtty']
+        with open(get_rxnorm()[0], newline='') as csvfile:
+            rxreader = csv.reader(csvfile, delimiter='|')
+            for row in rxreader:
+                data = dict(zip(columns, row))
+                data.pop('splVersion')
+                setId = data.pop('setId')
+                try:
+                    setObj = Set.objects.get(id=setId)
+                except Exception:
+                    continue
+                setObj.rxnorms.create(**data)
