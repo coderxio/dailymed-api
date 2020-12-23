@@ -52,8 +52,9 @@ try:
         shutil.copyfileobj(r, f)
     with zipfile.ZipFile(f'{data_dir}/rxnorm.zip') as zip_ref:
         zip_ref.extractall(output_dir)
+    os.remove(f'{data_dir}/rxnorm.zip')
 except Exception as err:
-    raise (f"Unable to perform request: {err}")
+    raise Exception(f"Unable to perform request: {err}") 
 
 try:
     if spl_zip:
@@ -72,6 +73,6 @@ try:
             extract(depth)
             os.remove(f'{data_dir}/spl_part{i}.zip')
 except Exception as err:
-    raise (f"Unable to perform request: {err}")
+    raise Exception(f"Unable to perform request: {err}")
 finally:
     print("Downloads complete")
