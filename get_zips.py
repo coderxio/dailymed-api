@@ -54,7 +54,7 @@ try:
         zip_ref.extractall(output_dir)
     os.remove(f'{data_dir}/rxnorm.zip')
 except Exception as err:
-    raise Exception(f"Unable to perform request: {err}") 
+    raise Exception(f"Unable to perform request: {err}")
 
 try:
     if spl_zip:
