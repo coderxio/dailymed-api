@@ -63,3 +63,18 @@ class Package(models.Model):
 
     def __str__(self):
         return f"{self.code} -- {self.product}"
+
+
+class RxNorm(models.Model):
+    """RxNorm mapping model"""
+    rxcui = models.CharField(max_length=20)
+    rxstring = models.CharField(max_length=255)
+    rxtty = models.CharField(max_length=5)
+    set = models.ForeignKey(
+        Set,
+        on_delete=models.PROTECT,
+        related_name='rxnorms',
+    )
+
+    def __str__(self):
+        return f"{self.rxcui} -- {self.rxtring} -- {self.rxtty}"
