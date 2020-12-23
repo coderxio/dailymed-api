@@ -1,11 +1,11 @@
 import scrapy
 # from scrapy.loader import ItemLoader
-from scraper.utils import get_filenames
+from scraper.utils import get_spls
 
 
 class InactiveSpider(scrapy.Spider):
     name = 'basic_extract'
-    start_urls = get_filenames()
+    start_urls = get_spls()
 
     def parse(self, response):
         response.selector.remove_namespaces()
