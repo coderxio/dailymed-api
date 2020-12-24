@@ -1,11 +1,19 @@
 from rest_framework import serializers
-from dailymed.models import Set, Spl, Product, InactiveIngredient, Package
+from dailymed.models import Set, Spl, Product, InactiveIngredient
+from dailymed.models import Package, RxNorm
 
 
 class PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
         exclude = ('product', )
+
+
+class RxNormSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = RxNorm
+        exclude = ('set', )
 
 
 class InactiveIngredientSerializer(serializers.ModelSerializer):
@@ -35,6 +43,15 @@ class SetSerializer(serializers.ModelSerializer):
     spls = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name='spl-detail',
     )
+
+    class Meta:
+        model = Set
+        fields = '__all__'
+
+
+class SuperSerializer(serializers.ModelSerializer):
+    spls = SplSerializer(many=True)
+    rxnorms = RxNormSerializer(many=True)
 
     class Meta:
         model = Set

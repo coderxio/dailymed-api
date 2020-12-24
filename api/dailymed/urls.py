@@ -4,10 +4,12 @@ from dailymed import views
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'set', views.SetViewSet)
-router.register(r'spl', views.SplViewSet)
-router.register(r'product', views.ProductViewSet)
-router.register(r'ndc', views.PackageViewSet)
+router.register(r'api/v1/set', views.SetViewSet)
+router.register(r'api/v1/spl', views.SplViewSet)
+router.register(r'api/v1/product', views.ProductViewSet)
+router.register(r'api/v1/ndc', views.PackageViewSet)
+router.register(r'api/v1/rxnorm', views.RxNormViewSet)
+router.register(r'api/v1/all', views.SuperViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [
