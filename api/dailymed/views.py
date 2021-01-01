@@ -6,16 +6,32 @@ from dailymed.serializers import (
     ProductSerializer,
     PackageSerializer,
     RxNormSerializer,
-    SuperSerializer
+    DetailSerializer
 )
-from dailymed.filters import SplFilter, SuperFilter
+from dailymed.filters import SplFilter, SetFilter
 
 
-class SetViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
+class DualSetSerializerViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet providing different serializers for list and detail views.
+
+    Use list_serializer and detail_serializer to provide them
+    """
+    def list(self, *args, **kwargs):
+        self.serializer_class = SetSerializer
+        self.filterset_class = SetFilter
+        return viewsets.ModelViewSet.list(self, *args, **kwargs)
+
+    def retrieve(self, *args, **kwargs):
+        self.serializer_class = DetailSerializer
+        return viewsets.ModelViewSet.retrieve(self, *args, **kwargs)
+
+
+class SetViewSet(DualSetSerializerViewSet):
+
     queryset = Set.objects.all()
-    serializer_class = SetSerializer
+    list_serializer = SetSerializer
+    retrieve_serializer = DetailSerializer
 
 
 class SplViewSet(
@@ -45,11 +61,3 @@ class RxNormViewSet(
 ):
     queryset = RxNorm.objects.all()
     serializer_class = RxNormSerializer
-
-
-class SuperViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
-    queryset = Set.objects.all()
-    serializer_class = SuperSerializer
-    filterset_class = SuperFilter

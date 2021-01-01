@@ -74,7 +74,7 @@ class SplFilter(filters.FilterSet):
         fields = []
 
 
-class SuperFilter(filters.FilterSet):
+class SetFilter(filters.FilterSet):
     set_id = filters.CharFilter(
         field_name='id',
         lookup_expr='iexact',

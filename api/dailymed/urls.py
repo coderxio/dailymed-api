@@ -9,7 +9,6 @@ router.register(r'api/v1/spl', views.SplViewSet)
 router.register(r'api/v1/product', views.ProductViewSet)
 router.register(r'api/v1/ndc', views.PackageViewSet)
 router.register(r'api/v1/rxnorm', views.RxNormViewSet)
-router.register(r'api/v1/all', views.SuperViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

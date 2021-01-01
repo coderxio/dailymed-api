@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.conf import settings
 from dailymed.models import Set, Spl, Product, InactiveIngredient
 from dailymed.models import Package, RxNorm
 
@@ -40,6 +41,8 @@ class SplSerializer(serializers.ModelSerializer):
 
 
 class SetSerializer(serializers.ModelSerializer):
+    set_url = serializers.SerializerMethodField()
+    rxnorms = RxNormSerializer(many=True)
     spls = serializers.HyperlinkedRelatedField(
         many=True, read_only=True, view_name='spl-detail',
     )
@@ -48,8 +51,11 @@ class SetSerializer(serializers.ModelSerializer):
         model = Set
         fields = '__all__'
 
+    def get_set_url(self, obj):
+        return f"http://{settings.BASE_URL}/api/v1/set/{obj.id}/"
 
-class SuperSerializer(serializers.ModelSerializer):
+
+class DetailSerializer(serializers.ModelSerializer):
     spls = SplSerializer(many=True)
     rxnorms = RxNormSerializer(many=True)
 
