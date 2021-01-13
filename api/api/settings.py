@@ -138,3 +138,6 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
 }
+
+# Note: setting this to allow all for dev purposes for now, will likely need to restrict domains in the future.
+CORS_ALLOW_ALL_ORIGINS = True
