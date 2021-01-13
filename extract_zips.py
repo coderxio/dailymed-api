@@ -6,7 +6,7 @@ from pathlib import Path
 def extract(depth=-1):
     cwd = Path(__file__).parent.absolute()
     data_dir = cwd / 'data'
-    partial_dir = data_dir / 'partial'
+    partial_dir = data_dir / 'spls'
 
     if not partial_dir.exists():
         partial_dir.mkdir(exist_ok=True)
